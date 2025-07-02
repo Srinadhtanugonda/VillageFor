@@ -1,3 +1,11 @@
+//
+//  CheckboxView.swift
+//  VillageFor
+//
+//  Created by Srinadh Tanugonda on 6/30/25.
+//
+
+
 import SwiftUI
 
 struct CheckboxView: View {
@@ -27,7 +35,8 @@ struct CheckboxView: View {
             HStack(alignment: .top, spacing: 12) {
                 Image(systemName: isChecked ? "checkmark.circle.fill" : "circle")
                     .font(.title2)
-                    .foregroundColor(isChecked ? .green : .gray)
+                    .foregroundColor(isChecked ? Color("ThemeGreen") : .gray)
+                    
                 
                 label
                     .foregroundColor(.primary)

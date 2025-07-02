@@ -1,8 +1,20 @@
+//
+//  DataConsentView.swift
+//  VillageFor
+//
+//  Created by Srinadh Tanugonda on 6/30/25.
+//
+
+
 import SwiftUI
 
 struct DataConsentView: View {
     
+    @Environment(\.dismiss) private var dismiss
+    
     @StateObject private var viewModel = DataConsentViewModel()
+    @EnvironmentObject var sessionManager: SessionManager
+
     
     // Define the URLs for your legal documents
     private let privacyPolicyURL = URL(string: "https://www.google.com/policies/privacy/")!
@@ -32,6 +44,8 @@ struct DataConsentView: View {
                     // Using markdown to easily create inline links
                     Text("I agree to the [Privacy Policy](\(privacyPolicyURL)) and [Terms of Use](\(termsOfUseURL))")
                         .font(.body)
+                        .tint(Color("ThemeGreen"))
+
                         // This environment setting makes the links green
                         .environment(\.openURL, OpenURLAction { url in
                             // Handle the link tap here if needed,
@@ -51,22 +65,28 @@ struct DataConsentView: View {
                     .fontWeight(.semibold)
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(viewModel.isContinueButtonDisabled ? Color.gray.opacity(0.5) : Color(red: 0.2, green: 0.4, blue: 0.3))
+                    .background(viewModel.isContinueButtonDisabled ? Color.gray.opacity(0.5) : Color("ThemeGreen"))
                     .foregroundColor(.white)
                     .cornerRadius(16)
             }
             .disabled(viewModel.isContinueButtonDisabled)
         }
         .padding()
-        .navigationBarBackButtonHidden(false) // Ensures the back button is visible
+        .navigationBarBackButtonHidden(true) // Ensures the back button is visible
         .navigationTitle("") // Hides the title from the navigation bar itself
-        .navigationBarTitleDisplayMode(.inline)
+        //.navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            CustomBackButtonToolbar()
+                }
+        .navigationDestination(
+                    isPresented: $viewModel.consentComplete,
+                    destination: { EmergencyDisclaimerView().environmentObject(sessionManager) }
+                )
     }
 }
-
-#Preview {
-    // Wrap in a NavigationView for previewing navigation elements
-    NavigationView {
-        DataConsentView()
-    }
-}
+//
+//#Preview {
+//    NavigationStack {
+//        DataConsentView().environmentObject(SessionManager())
+//    }
+//}

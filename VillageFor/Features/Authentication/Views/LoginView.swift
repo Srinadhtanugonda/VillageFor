@@ -9,10 +9,21 @@ import SwiftUI
 
 struct LoginView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        // You would build your full Login UI here with fields for email/password
+        // and a LoginViewModel to handle the logic.
+        VStack {
+            Text("Login View")
+                .font(.largeTitle)
+            Spacer()
+        }
+        .padding()
+        .navigationTitle("Log In")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 #Preview {
-    LoginView()
+    NavigationView {
+        LoginView()
+    }
 }

@@ -1,3 +1,11 @@
+//
+//  FloatingLabelTextField.swift
+//  VillageFor
+//
+//  Created by Srinadh Tanugonda on 6/30/25.
+//
+
+
 import SwiftUI
 
 struct FloatingLabelTextField: View {
@@ -48,23 +56,3 @@ struct FloatingLabelTextField: View {
     }
 }
 
-// MARK: - Preview Provider (for easy testing in Canvas)
-struct FloatingLabelTextField_Previews: PreviewProvider {
-    // Create a dummy state variable for the preview
-    @State static var previewText: String = ""
-
-    static var previews: some View {
-        VStack(spacing: 20) {
-            FloatingLabelTextField(text: $previewText, placeholder: "First Name")
-                .padding(.horizontal)
-
-            FloatingLabelTextField(text: .constant("Pre-filled Name"), placeholder: "Last Name")
-                .padding(.horizontal)
-
-            FloatingLabelTextField(text: .constant("test@example.com"), placeholder: "Email Address")
-                .padding(.horizontal)
-        }
-        .previewLayout(.sizeThatFits)
-        .background(Color.gray.opacity(0.1))
-    }
-}

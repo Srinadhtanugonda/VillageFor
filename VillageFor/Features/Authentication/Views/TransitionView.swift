@@ -3,40 +3,40 @@ import SwiftUI
 struct TransitionView: View {
     @State private var navigateToAgePicker = false
     
+    // Define the custom green color from your design
+    private let backgroundColor = Color("ThemeGreen")
+    @EnvironmentObject var sessionManager: SessionManager
+
+    
     var body: some View {
-        VStack(spacing: 20) {
-            Spacer()
+        ZStack {
+            // 1. Set the new background color
+            backgroundColor.ignoresSafeArea()
             
-            Text("Welcome to the village!")
+            // 2. Display the new text
+            Text("Answer a few\nquestions to help us\nget to know you...")
                 .font(.largeTitle)
                 .fontWeight(.bold)
-            
-            ProgressView() // This shows a spinning activity indicator
-                .progressViewStyle(CircularProgressViewStyle())
-                .scaleEffect(1.5) // Make it a bit larger
-            
-            Spacer()
+                .foregroundColor(.white)
+                .multilineTextAlignment(.center)
+                .padding()
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.white.ignoresSafeArea())
         .navigationBarBackButtonHidden(true)
-        // This modifier triggers an action when the view appears
+        // This logic remains the same. It triggers the navigation after 2 seconds.
         .onAppear {
-            // Wait for 2 seconds, then set the state to trigger navigation
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 self.navigateToAgePicker = true
             }
         }
-        // This navigation destination listens for the state change
         .navigationDestination(
             isPresented: $navigateToAgePicker,
-            destination: { AgePickerView() }
+            destination: { AgePickerView().environmentObject(sessionManager) }
         )
     }
 }
 
 #Preview {
     NavigationStack {
-        TransitionView()
+        TransitionView().environmentObject(SessionManager())
     }
 }

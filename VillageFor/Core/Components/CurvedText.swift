@@ -1,3 +1,11 @@
+//
+//  CurvedText.swift
+//  VillageFor
+//
+//  Created by Srinadh Tanugonda on 6/30/25.
+//
+
+
 import SwiftUI
 
 struct CurvedText: View {
@@ -56,5 +64,5 @@ struct CurvedText: View {
 
 #Preview {
     // You can adjust the radius and kerning here to test different looks!
-    CurvedText(text: "build your village", radius: 180, kerning: 11)
+    CurvedText(text: "build your village", radius:200, kerning: 3)
 }

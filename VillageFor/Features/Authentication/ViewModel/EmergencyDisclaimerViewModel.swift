@@ -1,7 +1,17 @@
+//
+//  EmergencyDisclaimerViewModel.swift
+//  VillageFor
+//
+//  Created by Srinadh Tanugonda on 6/30/25.
+//
+
+
 import Foundation
 
 @MainActor
 class EmergencyDisclaimerViewModel: ObservableObject {
+    
+    @Published var shouldNavigateToNextStep = false
     
     func yesButtonTapped() {
         // IMPORTANT: In a real app, this should immediately direct the user
@@ -15,6 +25,7 @@ class EmergencyDisclaimerViewModel: ObservableObject {
     func noButtonTapped() {
         // If the user selects "No", they can continue into the main app.
         // Here you would likely dismiss the entire authentication flow.
-        print("NO tapped: Proceeding to main app.")
+        print("NO tapped in EmergencyDisclaimerViewModel, navigatig to create profile screen")
+        shouldNavigateToNextStep = true
     }
 }

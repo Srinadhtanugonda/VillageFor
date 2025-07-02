@@ -1,3 +1,11 @@
+//
+//  SessionManager.swift
+//  VillageFor
+//
+//  Created by Srinadh Tanugonda on 6/30/25.
+//
+
+
 import Foundation
 
 // This object will be shared across the app to manage the session state.
