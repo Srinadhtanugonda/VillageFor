@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseCore
 
 struct User: Identifiable, Codable {
     let id: String
@@ -16,9 +17,17 @@ struct User: Identifiable, Codable {
     var lastName: String?
     var phoneNumber: String?
     var age: Int?
+    var dataConsent: DataConsent?
     
     // Add a computed property for display name
     var fullName: String {
         "\(firstName ?? "") \(lastName ?? "")".trimmingCharacters(in: .whitespacesAndNewlines)
     }
+}
+
+
+struct DataConsent: Codable {
+    var agreedToHealthData: Bool?
+    var agreedToTerms: Bool?
+    var consentTimestamp: Timestamp?
 }

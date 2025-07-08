@@ -63,7 +63,6 @@
 		519802762E12C518009BFFBD /* Exceptions for "VillageFor" folder in "VillageForTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				App/ViewModel/MainViewModel.swift,
 				Core/Models/User.swift,
 				Core/Services/AuthenticationService.swift,
 				Core/Services/FirestoreService.swift,
@@ -88,7 +87,6 @@
 		519802772E12C518009BFFBD /* Exceptions for "VillageFor" folder in "VillageForUITests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				App/ViewModel/MainViewModel.swift,
 				Core/Models/User.swift,
 				Core/Services/AuthenticationService.swift,
 				Core/Services/FirestoreService.swift,

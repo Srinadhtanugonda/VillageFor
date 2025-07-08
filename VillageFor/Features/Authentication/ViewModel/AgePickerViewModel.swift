@@ -14,6 +14,8 @@ class AgePickerViewModel: ObservableObject {
     
     let ageRange = 18...100
     @Published var selectedAge: Int? = 34
+    let itemHeight: CGFloat = 80
+
     
     private let firestoreService = FirestoreService()
     

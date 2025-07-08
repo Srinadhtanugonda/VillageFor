@@ -28,4 +28,9 @@ class FirestoreService {
           // without overwriting the whole thing.
           try await usersCollection.document(uid).updateData(["age": age])
       }
+    
+    func fetchUserProfile(uid: String) async throws -> User? {
+        let snapshot = try await usersCollection.document(uid).getDocument()
+        return try snapshot.data(as: User.self)
+    }
 }

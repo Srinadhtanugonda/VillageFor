@@ -22,15 +22,14 @@ struct VillageForApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
-    @StateObject private var mainViewModel = MainViewModel()
-    @StateObject private var sessionManager = SessionManager() // 1. Create the session manager
+    @StateObject private var sessionManager = SessionManager()
     
     var body: some Scene {
         WindowGroup {
-            // 2. The app now checks for a logged-in user AND if onboarding is complete.
-            if mainViewModel.currentUser != nil && sessionManager.isOnboardingComplete {
-                // This is the main part of your app. We'll create a placeholder for now.
-                Text("Home Screen!")
+            // 2. we now checks for a logged-in user AND if onboarding is complete.
+            if sessionManager.isOnboardingComplete, let user = sessionManager.currentUser {
+                // Navigation to homepage landing of our app, passing currentUser object.
+                HomeView(user: user).environmentObject(sessionManager)
             } else {
                 // The authentication flow
                 WelcomeView()
