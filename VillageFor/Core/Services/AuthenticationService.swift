@@ -7,8 +7,12 @@
 
 import Foundation
 import FirebaseAuth
+import FirebaseFirestore 
 
 class AuthenticationService {
+    
+    private let usersCollection = Firestore.firestore().collection("users")
+
     
     // A function to handle the creation of a new user account
     // using modern Swift concurrency (async/await).
@@ -29,5 +33,24 @@ class AuthenticationService {
         }
     }
     
-    // You would add other functions here like signIn, signOut, passwordReset, etc.
+    // we need to add other functions here like signIn, signOut, passwordReset, etc.
+    
+    func signIn(withEmail email: String, password: String) async throws -> User {
+           // 1. Sign in the user with Firebase Authentication
+           let authResult = try await Auth.auth().signIn(withEmail: email, password: password)
+           let uid = authResult.user.uid
+           
+           // 2. Fetch the user's profile document from Firestore
+           let snapshot = try await usersCollection.document(uid).getDocument()
+           
+           // 3. Decode the document into our User model
+           let user = try snapshot.data(as: User.self)
+           
+           // 4. Return the complete user object
+           return user
+       }
+    
+    func signOut() throws {
+        try Auth.auth().signOut()
+    }
 }

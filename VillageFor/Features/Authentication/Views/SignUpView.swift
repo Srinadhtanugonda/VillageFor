@@ -15,11 +15,11 @@ struct SignUpView: View {
         
         ZStack {
             // This link will be invisible but will activate when registrationSuccessful is true
-//            NavigationLink(
-//                destination: DataConsentView(),
-//                isActive: $viewModel.registrationSuccessful,
-//                label: { EmptyView() }
-//            )
+            //            NavigationLink(
+            //                destination: DataConsentView(),
+            //                isActive: $viewModel.registrationSuccessful,
+            //                label: { EmptyView() }
+            //            )
         }
         
         VStack(spacing: 20) {
@@ -67,9 +67,10 @@ struct SignUpView: View {
         .navigationTitle("Create Account")
         .navigationBarTitleDisplayMode(.inline)
         .navigationDestination(
-                    isPresented: $viewModel.registrationSuccessful,
-                    destination: { DataConsentView() }
-                )    }
+            isPresented: $viewModel.registrationSuccessful,
+            destination: { DataConsentView() }
+        )
+    }
 }
 
 #Preview {
