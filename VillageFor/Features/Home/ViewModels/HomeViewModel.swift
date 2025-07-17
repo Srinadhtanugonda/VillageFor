@@ -19,6 +19,11 @@ class HomeViewModel: ObservableObject {
     
     private let authService = AuthenticationService()
     
+    @Published var shouldNavigateToMoodCheck = false
+    @Published var shouldNavigateToEPDSAssessment = false
+    
+    
+    
     
     init(user: User) {
         self.userName = user.firstName ?? "User"
@@ -52,12 +57,12 @@ class HomeViewModel: ObservableObject {
     }
     
     func navigateToMoodCheck() {
-        // Handle mood check navigation
+        shouldNavigateToMoodCheck = true
         print("Navigate to mood check")
     }
     
     func navigateToEPDSAssessment() {
-        // Handle EPDS assessment navigation
+        shouldNavigateToEPDSAssessment = true
         print("Navigate to EPDS assessment")
     }
 }

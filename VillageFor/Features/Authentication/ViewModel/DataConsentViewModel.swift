@@ -16,6 +16,13 @@ class DataConsentViewModel: ObservableObject {
     @Published var agreesToTerms = false
     @Published var consentComplete = false
     
+       private let firestoreService: FirestoreServiceProtocol
+       
+       init(firestoreService: FirestoreServiceProtocol = FirestoreService()) {
+           self.firestoreService = firestoreService
+       }
+    
+    
     // A computed property to determine if the continue button should be enabled.
     var isContinueButtonDisabled: Bool {
         // It's disabled if either of the boxes is not checked.

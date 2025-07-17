@@ -57,15 +57,25 @@
 		5198023E2E12C1C0009BFFBD /* VillageFor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VillageFor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5198024B2E12C1C1009BFFBD /* VillageForTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VillageForTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		519802552E12C1C1009BFFBD /* VillageForUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VillageForUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		51AEF9CD2E1DA48600CF070E /* VillageFor.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = VillageFor.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		51480B172E1DC67000BD188C /* Exceptions for "VillageForTests" folder in "VillageFor" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Features/MockAuthentication/DataConsentViewModel_Tests.swift,
+			);
+			target = 5198023D2E12C1C0009BFFBD /* VillageFor */;
+		};
 		519802762E12C518009BFFBD /* Exceptions for "VillageFor" folder in "VillageForTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Core/Models/User.swift,
+				Core/Protocols/FirestoreServiceProtocol.swift,
 				Core/Services/AuthenticationService.swift,
 				Core/Services/FirestoreService.swift,
+				Core/Services/UserNotificationsService.swift,
 				Features/Authentication/ViewModel/AgePickerViewModel.swift,
 				Features/Authentication/ViewModel/CreateProfileViewModel.swift,
 				Features/Authentication/ViewModel/DataConsentViewModel.swift,
@@ -80,6 +90,8 @@
 				Features/Authentication/Views/SignUpView.swift,
 				Features/Authentication/Views/TransitionView.swift,
 				Features/Authentication/Views/WelcomeView.swift,
+				Features/TabBar/Model/TabBarModel.swift,
+				Features/TabBar/View/TabBarView.swift,
 				"GoogleService-Info.plist",
 			);
 			target = 5198024A2E12C1C1009BFFBD /* VillageForTests */;
@@ -88,8 +100,10 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Core/Models/User.swift,
+				Core/Protocols/FirestoreServiceProtocol.swift,
 				Core/Services/AuthenticationService.swift,
 				Core/Services/FirestoreService.swift,
+				Core/Services/UserNotificationsService.swift,
 				Features/Authentication/ViewModel/AgePickerViewModel.swift,
 				Features/Authentication/ViewModel/CreateProfileViewModel.swift,
 				Features/Authentication/ViewModel/DataConsentViewModel.swift,
@@ -104,6 +118,8 @@
 				Features/Authentication/Views/SignUpView.swift,
 				Features/Authentication/Views/TransitionView.swift,
 				Features/Authentication/Views/WelcomeView.swift,
+				Features/TabBar/Model/TabBarModel.swift,
+				Features/TabBar/View/TabBarView.swift,
 				"GoogleService-Info.plist",
 			);
 			target = 519802542E12C1C1009BFFBD /* VillageForUITests */;
@@ -122,6 +138,9 @@
 		};
 		5198024E2E12C1C1009BFFBD /* VillageForTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				51480B172E1DC67000BD188C /* Exceptions for "VillageForTests" folder in "VillageFor" target */,
+			);
 			path = VillageForTests;
 			sourceTree = "<group>";
 		};
@@ -187,6 +206,7 @@
 		519802352E12C1C0009BFFBD = {
 			isa = PBXGroup;
 			children = (
+				51AEF9CD2E1DA48600CF070E /* VillageFor.xctestplan */,
 				519802402E12C1C0009BFFBD /* VillageFor */,
 				5198024E2E12C1C1009BFFBD /* VillageForTests */,
 				519802582E12C1C1009BFFBD /* VillageForUITests */,
@@ -538,16 +558,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = K8K58FJ38M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -566,16 +590,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = K8K58FJ38M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

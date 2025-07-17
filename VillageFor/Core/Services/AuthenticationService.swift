@@ -9,7 +9,7 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore 
 
-class AuthenticationService {
+class AuthenticationService : AuthenticationServiceProtocol {
     
     private let usersCollection = Firestore.firestore().collection("users")
 
