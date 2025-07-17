@@ -17,11 +17,6 @@ struct AgePickerView: View {
             
             Spacer()
             
-            Text("Debug: Selected Age is \(viewModel.selectedAge ?? 0)")
-                .font(.caption)
-                .foregroundColor(.red)
-                .padding(.top, 5)
-
             
             // Custom Picker UI
             ZStack {
@@ -90,6 +85,13 @@ struct AgePickerView: View {
             }
             .buttonStyle(.primary)
             .padding(.horizontal, 24)
+            .navigationDestination(
+                isPresented: $viewModel.navigateToNotificationsScreen,
+                destination: {
+                    NotificationsView()
+                        .environmentObject(sessionManager)
+                }
+            )
         }
         .padding(.vertical)
         .background(Color(UIColor.systemGray6).ignoresSafeArea())
@@ -106,46 +108,3 @@ struct AgePickerView: View {
         AgePickerView().environmentObject(SessionManager())
     }
 }
-
-
-//            ScrollViewReader { proxy in
-//                ScrollView(.vertical, showsIndicators: false) {
-//                    LazyVStack(spacing: 5) {
-//                        Color.clear.frame(height: 280)
-//
-//                        ForEach(viewModel.ageRange, id: \.self) { age in
-//                            GeometryReader { geo in
-//                                let distance = abs(geo.frame(in: .global).midY - UIScreen.main.bounds.height / 2)
-//                                let isSelected = age == (viewModel.selectedAge ?? 0)
-//                                let opacity = max(0.3, 1.2 - distance / 160)
-//                                let fontSize: CGFloat = isSelected ? 50 : max(24, 48 - distance / 14)
-//
-//                                Text("\(age)")
-//                                    .font(.system(size: fontSize, weight: .medium))
-//                                    .foregroundColor(Color("ThemeGreen"))
-//                                    .opacity(opacity)
-//                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-//                                    .background(
-//                                        RoundedRectangle(cornerRadius: 30)
-//                                            .fill(Color("ThemeGreen").opacity(0.1))
-//                                            .opacity(isSelected ? 1 : 0)
-//                                    )
-//                            }
-//                            .frame(height: 70)
-//                            .id(age)
-//                        }
-//                        Color.clear.frame(height: 200)
-//                    }.scrollTargetLayout()
-//                }.scrollTargetBehavior(.viewAligned)
-//                    .scrollPosition(id: $viewModel.selectedAge)
-//                    .onAppear {
-//                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-//                            proxy.scrollTo(34, anchor: .center)
-//                        }
-//                    }
-//                    .onChange(of: viewModel.selectedAge) { oldValue, newValue in
-//                        print("ViewModel selectedAge changed: \(oldValue) -> \(newValue)")
-//                    }
-//            }
-//            .frame(height: 480)
-//            .clipped()

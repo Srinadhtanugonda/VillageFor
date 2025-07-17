@@ -9,10 +9,20 @@
 import Foundation
 import FirebaseFirestore
 
-class FirestoreService {
+class FirestoreService: FirestoreServiceProtocol {
+
+    
+    func saveUserConsent(agreedToHealthData: Bool, agreedToTerms: Bool) async throws {
+        print("need to get an update from christy regarding the placement of this screen")
+    }
+    
     
     // Get a reference to the 'users' collection in Firestore
     private let usersCollection = Firestore.firestore().collection("users")
+
+    private func userDocument(uid: String) -> DocumentReference {
+           return usersCollection.document(uid)
+       }
     
     // Saves the user's profile data to Firestore
     func saveUserProfile(user: User) async throws {
@@ -29,8 +39,38 @@ class FirestoreService {
           try await usersCollection.document(uid).updateData(["age": age])
       }
     
+    func updateUserPreferences(uid: String, preferences: NotificationPreferences) async throws {
+        // We need to convert the struct to a dictionary to save it
+        let data = [
+            "moodCheckins": preferences.moodCheckins,
+            "epdsAssessments": preferences.epdsAssessments,
+            "dailyAffirmations": preferences.dailyAffirmations
+        ]
+        try await userDocument(uid: uid).updateData(["notificationPreferences": data])
+    }
+    
     func fetchUserProfile(uid: String) async throws -> User? {
         let snapshot = try await usersCollection.document(uid).getDocument()
         return try snapshot.data(as: User.self)
     }
+    
+    //MARK: MoodEntries
+    
+    func saveMoodEntry(uid: String, moodValue: Double) async throws {
+           let moodEntry = MoodEntry(
+               value: moodValue,
+               timestamp: Timestamp(date: Date())
+           )
+           // This correctly saves the entry to a subcollection within the user's document
+           try await userDocument(uid: uid).collection("moodEntries").addDocument(from: moodEntry)
+       }
+    
+    func saveEnergyEntry(uid: String, energyValue: Double) async throws {
+           let energyEntry = EnergyEntry(
+               value: energyValue,
+               timestamp: Timestamp(date: Date())
+           )
+           // This correctly saves the entry to a subcollection within the user's document
+           try await userDocument(uid: uid).collection("energyEntries").addDocument(from: energyEntry)
+       }
 }

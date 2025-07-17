@@ -52,6 +52,14 @@ struct HomeView: View {
             .background(Color("LightGrayBG"))
             .ignoresSafeArea(.container, edges: .bottom) // Only ignore safe area at bottom
             .toolbar(.hidden, for: .navigationBar)
+            .navigationDestination(
+                isPresented: $viewModel.shouldNavigateToMoodCheck,
+                destination: { MoodCheckinView() }
+            )
+            .navigationDestination(
+                isPresented: $viewModel.shouldNavigateToEPDSAssessment,
+                destination: { EnergyLevelView() }
+            )
         }
     }
 }

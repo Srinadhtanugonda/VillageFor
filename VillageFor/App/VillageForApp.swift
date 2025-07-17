@@ -26,15 +26,14 @@ struct VillageForApp: App {
     
     var body: some Scene {
         WindowGroup {
-            // 2. we now checks for a logged-in user AND if onboarding is complete.
+            //we now check for a logged-in user AND if onboarding is complete.
             if sessionManager.isOnboardingComplete, let user = sessionManager.currentUser {
                 // Navigation to homepage landing of our app, passing currentUser object.
-                HomeView(user: user).environmentObject(sessionManager)
+                MainTabView(user: user).environmentObject(sessionManager) 
             } else {
-                // The authentication flow
+                //authentication flow
                 WelcomeView()
-                    // 3. Inject the session manager into the environment
-                    // so nested views (like CreateProfileView) can access it.
+                    //Injecting the session manager into the environment
                     .environmentObject(sessionManager)
             }
         }
