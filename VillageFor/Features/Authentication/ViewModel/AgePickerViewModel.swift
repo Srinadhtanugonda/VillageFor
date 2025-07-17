@@ -15,6 +15,7 @@ class AgePickerViewModel: ObservableObject {
     let ageRange = 18...100
     @Published var selectedAge: Int? = 34
     let itemHeight: CGFloat = 80
+    @Published var navigateToNotificationsScreen = false
 
     
     private let firestoreService = FirestoreService()
@@ -30,10 +31,8 @@ class AgePickerViewModel: ObservableObject {
             // Try to update the user's age in the database
             try await firestoreService.updateUserAge(uid: uid, age: age)
             print("User age (\(age)) saved successfully.")
-            
-            // On success, complete the onboarding process
-            sessionManager.isOnboardingComplete = true
-            
+            navigateToNotificationsScreen = true
+                        
         } catch {
             print("Error updating user age: \(error.localizedDescription)")
             // Optionally, show an error alert to the user
