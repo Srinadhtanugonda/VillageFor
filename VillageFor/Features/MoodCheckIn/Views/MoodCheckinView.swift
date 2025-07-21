@@ -10,11 +10,14 @@ import SwiftUI
 
 struct MoodCheckinView: View {
     
-    @StateObject private var viewModel = MoodCheckinViewModel()
+    @StateObject private var viewModel: MoodCheckinViewModel
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var sessionManager: SessionManager
-    @State private var feelingLevel: Double = 65
-
+    
+    init(dailyCheckin: DailyCheckin) {
+        _viewModel = StateObject(wrappedValue: MoodCheckinViewModel(dailyCheckin: dailyCheckin))
+    }
+    
     var body: some View {
         VStack(alignment: .center) {
             Text("How do you feel today?")
@@ -24,16 +27,16 @@ struct MoodCheckinView: View {
                 .alignmentGuide(.leading) { $0[VerticalAlignment.top] }
             
             Spacer()
-          
-                CustomVerticalSlider(
-                    value: $feelingLevel,
-                    range: 0...100,
-                    topLabel: "Positive",
-                    bottomLabel: "Negative",
-                    height: 400,
-                    width: 20
-                )
-                .frame(maxHeight: 400)
+            
+            CustomVerticalSlider(
+                value: $viewModel.moodValue,
+                range: 0...100,
+                topLabel: "Positive",
+                bottomLabel: "Negative",
+                height: 400,
+                width: 20
+            )
+            .frame(maxHeight: 400)
             
             
             Spacer()
@@ -41,8 +44,7 @@ struct MoodCheckinView: View {
             
             Button("Continue") {
                 Task {
-                    await viewModel.saveMoodEntry()
-                    dismiss()
+                    viewModel.continueTapped()
                 }
             }
             .buttonStyle(.primary)
@@ -52,15 +54,17 @@ struct MoodCheckinView: View {
         .navigationBarBackButtonHidden(true)
         .toolbar {
             CustomBackButtonToolbar()
-            // ... trailing close button ...
         }
+        .onAppear {
+            // When this view appears, telling the session manager to hide the tab bar.
+            sessionManager.isTabBarHidden = true
+        }
+        .navigationDestination(
+            isPresented: $viewModel.shouldNavigateToEnergyCheck,
+            destination: {
+                let checkin = DailyCheckin(moodValue: viewModel.moodValue, timestamp: .init(date: Date()))
+                EnergyLevelView(dailyCheckin: checkin) }
+        )
     }
 }
 
-
-#Preview {
-    
-    NavigationStack {
-        MoodCheckinView().environmentObject(SessionManager())
-    }
-}

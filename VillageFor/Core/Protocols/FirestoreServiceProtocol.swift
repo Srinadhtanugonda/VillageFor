@@ -12,5 +12,10 @@ protocol FirestoreServiceProtocol {
     func saveUserProfile(user: User) async throws
     func updateUserAge(uid: String, age: Int) async throws
     func saveUserConsent(agreedToHealthData: Bool, agreedToTerms: Bool) async throws
-    // We would add other functions here, like fetchUserProfile, etc.
+    func updateUserPreferences(uid: String, preferences: NotificationPreferences) async throws
+    func fetchUserProfile(uid: String) async throws -> User?
+
+    // We would add other functions here etc.
+    func fetchLatestCheckin(uid: String) async throws -> DailyCheckin?
+    
 }

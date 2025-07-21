@@ -23,6 +23,7 @@ class CreateProfileViewModel: ObservableObject {
     @Published var lastName = ""
     @Published var phoneNumber = ""
     @Published var email = ""
+    //MARK: we won't be saving password in User struct, this is just for UI purpose.
     @Published var password = ""
     
     @Published var errorMessage: String?

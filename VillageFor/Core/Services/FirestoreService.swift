@@ -29,7 +29,7 @@ class FirestoreService: FirestoreServiceProtocol {
         // We use the user's unique ID (from Firebase Auth) as the document ID
         // This links the auth user to their database record.
         // The `Codable` conformance on our User model lets us do this easily.
-        try usersCollection.document(user.id).setData(from: user, merge: true)
+        try await userDocument(uid: user.id).setData(from: user, merge: true)
     }
     
     /// Updates the age for a specific user in Firestore.
@@ -54,23 +54,25 @@ class FirestoreService: FirestoreServiceProtocol {
         return try snapshot.data(as: User.self)
     }
     
-    //MARK: MoodEntries
+    //MARK: Daily mood checkin.
     
-    func saveMoodEntry(uid: String, moodValue: Double) async throws {
-           let moodEntry = MoodEntry(
-               value: moodValue,
-               timestamp: Timestamp(date: Date())
-           )
-           // This correctly saves the entry to a subcollection within the user's document
-           try await userDocument(uid: uid).collection("moodEntries").addDocument(from: moodEntry)
-       }
+    func saveDailyCheckin(uid: String, checkin: DailyCheckin) async throws {
+        // This creates a new document in a "dailyCheckins" subcollection for the user.
+        try userDocument(uid: uid).collection("dailyCheckins").addDocument(from: checkin)
+    }
     
-    func saveEnergyEntry(uid: String, energyValue: Double) async throws {
-           let energyEntry = EnergyEntry(
-               value: energyValue,
-               timestamp: Timestamp(date: Date())
-           )
-           // This correctly saves the entry to a subcollection within the user's document
-           try await userDocument(uid: uid).collection("energyEntries").addDocument(from: energyEntry)
-       }
+    func fetchLatestCheckin(uid: String) async throws -> DailyCheckin? {
+        let snapshot = try await userDocument(uid: uid)
+            .collection("dailyCheckins")
+            // Order the results by timestamp, with the newest first
+            .order(by: "timestamp", descending: true)
+            // We only need the single most recent document
+            .limit(to: 1)
+            .getDocuments()
+        
+        // Safely decode and return the first document found, or nil if none exist.
+        return snapshot.documents.compactMap { doc in
+            try? doc.data(as: DailyCheckin.self)
+        }.first
+    }
 }

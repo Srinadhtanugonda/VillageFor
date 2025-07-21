@@ -34,6 +34,8 @@
 		519802D12E12C9BF009BFFBD /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 519802D02E12C9BF009BFFBD /* FirebaseStorage */; };
 		519802D32E12C9BF009BFFBD /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 519802D22E12C9BF009BFFBD /* FirebaseStorageCombine-Community */; };
 		519802D52E12C9BF009BFFBD /* FirebaseVertexAI in Frameworks */ = {isa = PBXBuildFile; productRef = 519802D42E12C9BF009BFFBD /* FirebaseVertexAI */; };
+		51F121032E2B54B2007CC6CB /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 51F121022E2B54B2007CC6CB /* FirebaseFirestore */; };
+		51F121052E2B54B8007CC6CB /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 51F121042E2B54B8007CC6CB /* FirebaseAuth */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,37 +63,9 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		51480B172E1DC67000BD188C /* Exceptions for "VillageForTests" folder in "VillageFor" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Features/MockAuthentication/DataConsentViewModel_Tests.swift,
-			);
-			target = 5198023D2E12C1C0009BFFBD /* VillageFor */;
-		};
 		519802762E12C518009BFFBD /* Exceptions for "VillageFor" folder in "VillageForTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Core/Models/User.swift,
-				Core/Protocols/FirestoreServiceProtocol.swift,
-				Core/Services/AuthenticationService.swift,
-				Core/Services/FirestoreService.swift,
-				Core/Services/UserNotificationsService.swift,
-				Features/Authentication/ViewModel/AgePickerViewModel.swift,
-				Features/Authentication/ViewModel/CreateProfileViewModel.swift,
-				Features/Authentication/ViewModel/DataConsentViewModel.swift,
-				Features/Authentication/ViewModel/EmergencyDisclaimerViewModel.swift,
-				Features/Authentication/ViewModel/LoginViewModel.swift,
-				Features/Authentication/ViewModel/SignUpViewModel.swift,
-				Features/Authentication/Views/AgePickerView.swift,
-				Features/Authentication/Views/CreateProfileView.swift,
-				Features/Authentication/Views/DataConsentView.swift,
-				Features/Authentication/Views/EmergencyDisclaimerView.swift,
-				Features/Authentication/Views/LoginView.swift,
-				Features/Authentication/Views/SignUpView.swift,
-				Features/Authentication/Views/TransitionView.swift,
-				Features/Authentication/Views/WelcomeView.swift,
-				Features/TabBar/Model/TabBarModel.swift,
-				Features/TabBar/View/TabBarView.swift,
 				"GoogleService-Info.plist",
 			);
 			target = 5198024A2E12C1C1009BFFBD /* VillageForTests */;
@@ -99,27 +73,6 @@
 		519802772E12C518009BFFBD /* Exceptions for "VillageFor" folder in "VillageForUITests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Core/Models/User.swift,
-				Core/Protocols/FirestoreServiceProtocol.swift,
-				Core/Services/AuthenticationService.swift,
-				Core/Services/FirestoreService.swift,
-				Core/Services/UserNotificationsService.swift,
-				Features/Authentication/ViewModel/AgePickerViewModel.swift,
-				Features/Authentication/ViewModel/CreateProfileViewModel.swift,
-				Features/Authentication/ViewModel/DataConsentViewModel.swift,
-				Features/Authentication/ViewModel/EmergencyDisclaimerViewModel.swift,
-				Features/Authentication/ViewModel/LoginViewModel.swift,
-				Features/Authentication/ViewModel/SignUpViewModel.swift,
-				Features/Authentication/Views/AgePickerView.swift,
-				Features/Authentication/Views/CreateProfileView.swift,
-				Features/Authentication/Views/DataConsentView.swift,
-				Features/Authentication/Views/EmergencyDisclaimerView.swift,
-				Features/Authentication/Views/LoginView.swift,
-				Features/Authentication/Views/SignUpView.swift,
-				Features/Authentication/Views/TransitionView.swift,
-				Features/Authentication/Views/WelcomeView.swift,
-				Features/TabBar/Model/TabBarModel.swift,
-				Features/TabBar/View/TabBarView.swift,
 				"GoogleService-Info.plist",
 			);
 			target = 519802542E12C1C1009BFFBD /* VillageForUITests */;
@@ -138,9 +91,6 @@
 		};
 		5198024E2E12C1C1009BFFBD /* VillageForTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				51480B172E1DC67000BD188C /* Exceptions for "VillageForTests" folder in "VillageFor" target */,
-			);
 			path = VillageForTests;
 			sourceTree = "<group>";
 		};
@@ -197,6 +147,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51F121032E2B54B2007CC6CB /* FirebaseFirestore in Frameworks */,
+				51F121052E2B54B8007CC6CB /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +162,7 @@
 				519802402E12C1C0009BFFBD /* VillageFor */,
 				5198024E2E12C1C1009BFFBD /* VillageForTests */,
 				519802582E12C1C1009BFFBD /* VillageForUITests */,
+				51F121012E2B54B2007CC6CB /* Frameworks */,
 				5198023F2E12C1C0009BFFBD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -222,6 +175,13 @@
 				519802552E12C1C1009BFFBD /* VillageForUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		51F121012E2B54B2007CC6CB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,6 +277,8 @@
 			);
 			name = VillageForUITests;
 			packageProductDependencies = (
+				51F121022E2B54B2007CC6CB /* FirebaseFirestore */,
+				51F121042E2B54B8007CC6CB /* FirebaseAuth */,
 			);
 			productName = VillageForUITests;
 			productReference = 519802552E12C1C1009BFFBD /* VillageForUITests.xctest */;
@@ -884,6 +846,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5198029F2E12C9BF009BFFBD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseVertexAI;
+		};
+		51F121022E2B54B2007CC6CB /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5198029F2E12C9BF009BFFBD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		51F121042E2B54B8007CC6CB /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5198029F2E12C9BF009BFFBD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -14,9 +14,9 @@ struct HomeView: View {
     @EnvironmentObject var sessionManager: SessionManager
     
     init(user: User) {
-           // we are creating the ViewModel and injecting the user data.
-           _viewModel = StateObject(wrappedValue: HomeViewModel(user: user))
-       }
+        // we are creating the ViewModel and injecting the user data.
+        _viewModel = StateObject(wrappedValue: HomeViewModel(user: user))
+    }
     
     var body: some View {
         NavigationStack {
@@ -45,6 +45,10 @@ struct HomeView: View {
                     // Support Section
                     SupportSection(articles: viewModel.supportArticles)
                 }
+                //pull-to-refresh functionality to check latest checkin.
+                .refreshable {
+                    await viewModel.fetchLatestCheckin()
+                }
                 .padding(.horizontal, 20)
                 .padding(.bottom, 40) // Extra padding for tab bar
             }
@@ -52,25 +56,34 @@ struct HomeView: View {
             .background(Color("LightGrayBG"))
             .ignoresSafeArea(.container, edges: .bottom) // Only ignore safe area at bottom
             .toolbar(.hidden, for: .navigationBar)
+            .onAppear {
+                sessionManager.isTabBarHidden = false
+            }
             .navigationDestination(
                 isPresented: $viewModel.shouldNavigateToMoodCheck,
-                destination: { MoodCheckinView() }
+                destination: {
+                    // Creating a NEW DailyCheckin object when starting the flow.
+                    let newCheckin = DailyCheckin(timestamp: .init(date: Date()))
+                    MoodCheckinView(dailyCheckin: newCheckin)
+                }
             )
-            .navigationDestination(
-                isPresented: $viewModel.shouldNavigateToEPDSAssessment,
-                destination: { EnergyLevelView() }
-            )
+//            .navigationDestination(
+//                isPresented: $viewModel.shouldNavigateToEPDSAssessment,
+//                destination: {
+//                    var checkin = viewModel.latestCheckin
+//                    EnergyLevelView(dailyCheckin: checkin) }
+//            )
         }
     }
 }
 
-#Preview {
-    let sampleUser = User(id: "123", email: "preview@test.com", firstName: "Caroline", lastName: "Brown")
-    
-    NavigationStack {
-        HomeView(user: sampleUser).environmentObject(SessionManager())
-    }
-}
+//#Preview {
+//    let sampleUser = User(id: "123", email: "preview@test.com", firstName: "Caroline", lastName: "Brown")
+//
+//    NavigationStack {
+//        HomeView(user: sampleUser).environmentObject(SessionManager())
+//    }
+//}
 
 
 

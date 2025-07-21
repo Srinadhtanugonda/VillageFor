@@ -9,14 +9,12 @@
 import Foundation
 import FirebaseFirestore
 
-struct MoodEntry: Identifiable, Codable {
+struct DailyCheckin: Identifiable, Codable {
     @DocumentID var id: String?
-    let value: Double
-    let timestamp: Timestamp
-}
-
-struct EnergyEntry: Identifiable, Codable {
-    @DocumentID var id: String?
-    let value: Double 
+    var moodValue: Double?
+    var energyValue: Double?
+    var selectedEmotion: String?
+    var journalText: String?
+    var factors: [String]?
     let timestamp: Timestamp
 }

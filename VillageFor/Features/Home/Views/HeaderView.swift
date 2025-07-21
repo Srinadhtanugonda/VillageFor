@@ -19,6 +19,7 @@ struct HeaderView: View {
                 .font(.largeTitle)
                 .fontWeight(.medium)
                 .foregroundColor(.primary)
+                .accessibilityIdentifier("WelcomeUserNameTextFieldInHeader")
             
             Spacer()
             

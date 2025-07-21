@@ -13,7 +13,6 @@ struct User: Identifiable, Codable {
     let id: String
     let email: String
     
-    // We can add new optional fields for the profile information
     var firstName: String?
     var lastName: String?
     var phoneNumber: String?
