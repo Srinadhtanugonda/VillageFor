@@ -17,6 +17,8 @@ class SessionManager: ObservableObject {
     // to the main home screen.
     @Published var isOnboardingComplete = false
     @Published var currentUser: User?
+    @Published var isTabBarHidden = false
+
     
     private var cancellables = Set<AnyCancellable>()
     

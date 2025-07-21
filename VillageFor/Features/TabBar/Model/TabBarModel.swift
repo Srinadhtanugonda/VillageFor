@@ -34,7 +34,7 @@ enum TabBarModel: String, CaseIterable {
             case .home:
                 return "house.fill"
             case .tools:
-                return "sparkles.fill"
+                return "sparkles"
             case .learn:
                 return "lightbulb.fill"
             case .insights:

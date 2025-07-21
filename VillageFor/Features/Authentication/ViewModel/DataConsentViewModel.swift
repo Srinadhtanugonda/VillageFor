@@ -16,13 +16,13 @@ class DataConsentViewModel: ObservableObject {
     @Published var agreesToTerms = false
     @Published var consentComplete = false
     
-       private let firestoreService: FirestoreServiceProtocol
-       
-       init(firestoreService: FirestoreServiceProtocol = FirestoreService()) {
-           self.firestoreService = firestoreService
-       }
-    
-    
+//       private let firestoreService: FirestoreServiceProtocol
+//       
+//       init(firestoreService: FirestoreServiceProtocol = FirestoreService()) {
+//           self.firestoreService = firestoreService
+//       }
+//    
+    //MARK: here we should implement userDefaults to save the userConsent data and then save to cloud when proceeding the last step.
     // A computed property to determine if the continue button should be enabled.
     var isContinueButtonDisabled: Bool {
         // It's disabled if either of the boxes is not checked.

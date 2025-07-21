@@ -5,16 +5,18 @@
 //  Created by Srinadh Tanugonda on 7/8/25.
 //
 
-
 import SwiftUI
 
 struct EnergyLevelView: View {
     
-    // 1. Use the new ViewModel
-    @StateObject private var viewModel = EnergyLevelViewModel()
-    @Environment(\.dismiss) private var dismiss
-    @State private var feelingLevel: Double = 65
-
+    @StateObject private var viewModel: EnergyLevelViewModel
+    @EnvironmentObject var sessionManager: SessionManager
+    //    @Environment(\.dismiss) private var dismiss
+    
+    init(dailyCheckin: DailyCheckin) {
+        _viewModel = StateObject(wrappedValue: EnergyLevelViewModel(dailyCheckin: dailyCheckin))
+    }
+    
     var body: some View {
         VStack(alignment: .center) {
             Text("How are your energy levels?")
@@ -26,7 +28,7 @@ struct EnergyLevelView: View {
             Spacer()
             
             CustomVerticalSlider(
-                value: $feelingLevel,
+                value: $viewModel.energyValue,
                 range: 0...100,
                 topLabel: "A lot of energy",
                 bottomLabel: "No energy",
@@ -34,33 +36,46 @@ struct EnergyLevelView: View {
                 width: 20
             )
             .frame(maxHeight: 400)
-
+            
             Spacer()
             Spacer()
-
             
             Button("Continue") {
                 Task {
-                    await viewModel.saveEnergyLevelEntry()
-                    dismiss()
+                    viewModel.contiueTapped()
                 }
             }
             .buttonStyle(.primary)
-            .padding(.horizontal, 24) // Add padding to the button
+            .padding(.horizontal, 24)
         }
         .padding()
         .background(Color(UIColor.systemGray6).ignoresSafeArea())
         .navigationBarBackButtonHidden(true)
         .toolbar {
             CustomBackButtonToolbar()
-            // ... trailing close button ...
+            
         }
+        .onAppear {
+            // When this view appears, telling the session manager to hide the tab bar.
+            sessionManager.isTabBarHidden = true
+        }
+        .navigationDestination(
+            isPresented: $viewModel.shouldNavigateToSelectAnEmotion
+        ) {
+            SelectEmotionView(dailyCheckin: updatedCheckin)
+        }
+    }
+    private var updatedCheckin: DailyCheckin {
+        var checkin = viewModel.dailyCheckin
+        checkin.energyValue = viewModel.energyValue
+        return checkin
     }
 }
 
 #Preview {
-    NavigationStack {
-        EnergyLevelView()
-    }
+    // The preview needs a sample DailyCheckin object to work
+    let sampleCheckin = DailyCheckin(timestamp: .init(date: Date()))
+    
+    return EnergyLevelView(dailyCheckin: sampleCheckin)
+        .environmentObject(SessionManager())
 }
-

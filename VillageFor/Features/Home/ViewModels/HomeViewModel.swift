@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUICore
+import FirebaseAuth
 
 @MainActor
 class HomeViewModel: ObservableObject {
@@ -17,16 +18,22 @@ class HomeViewModel: ObservableObject {
     @Published var dailyAffirmation: Affirmation
     @Published var supportArticles: [Article]
     
-    private let authService = AuthenticationService()
-    
     @Published var shouldNavigateToMoodCheck = false
     @Published var shouldNavigateToEPDSAssessment = false
     
     
+    // MARK: - Services
     
+    private let authService: AuthenticationServiceProtocol
+    private let firestoreService: FirestoreServiceProtocol
     
-    init(user: User) {
+    var latestCheckin: DailyCheckin?
+    
+    init(user: User, authService: AuthenticationServiceProtocol = AuthenticationService(),
+         firestoreService: FirestoreServiceProtocol = FirestoreService()) {
         self.userName = user.firstName ?? "User"
+        self.authService = authService
+        self.firestoreService = firestoreService
         
         // Initializing with sample data
         self.dailyAffirmation = Affirmation(
@@ -45,6 +52,23 @@ class HomeViewModel: ObservableObject {
                 imageURL: "https://example.com/baby-prep.jpg"
             )
         ]
+        
+        Task {
+            await fetchLatestCheckin()
+        }
+        
+    }
+    
+    /// Fetches the most recent DailyCheckin document from Firestore for the current user.
+    func fetchLatestCheckin() async {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        do {
+            self.latestCheckin = try await firestoreService.fetchLatestCheckin(uid: uid)
+            print("✅ Successfully fetched latest check-in.")
+        } catch {
+            print("❌ Error fetching latest check-in: \(error.localizedDescription)")
+        }
     }
     
     

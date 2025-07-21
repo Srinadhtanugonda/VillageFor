@@ -26,16 +26,42 @@ struct VillageForApp: App {
     
     var body: some Scene {
         WindowGroup {
+            if ProcessInfo.processInfo.arguments.contains("-debugBypassLogin") {
+                // If we are in debug mode, show the main tabs immediately
+                // with a sample user.
+                MainTabView()
+                    .onAppear {
+                        // We manually set the session manager's user for debug purposes
+                        sessionManager.currentUser = MockData.sampleUser
+                    }
+                    .environmentObject(sessionManager)
+                
+            }
             //we now check for a logged-in user AND if onboarding is complete.
-            if sessionManager.isOnboardingComplete, let user = sessionManager.currentUser {
+            else if sessionManager.isOnboardingComplete, sessionManager.currentUser != nil {
                 // Navigation to homepage landing of our app, passing currentUser object.
-                MainTabView(user: user).environmentObject(sessionManager) 
+                MainTabView().environmentObject(sessionManager)
             } else {
                 //authentication flow
                 WelcomeView()
-                    //Injecting the session manager into the environment
+                //Injecting the session manager into the environment
                     .environmentObject(sessionManager)
             }
+            
         }
     }
 }
+
+// By placing MockData inside an #if DEBUG block, it will only be available
+// during development and will not be included in your final app.
+#if DEBUG
+struct MockData {
+    static let sampleUser = User(
+        id: "debug_user_123",
+        email: "Srinadh@debug.com",
+        firstName: "Sri",
+        lastName: "",
+        age: 26
+    )
+}
+#endif
