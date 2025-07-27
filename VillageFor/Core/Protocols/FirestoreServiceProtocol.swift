@@ -16,6 +16,7 @@ protocol FirestoreServiceProtocol {
     func fetchUserProfile(uid: String) async throws -> User?
 
     // We would add other functions here etc.
+    func saveDailyCheckin(uid: String, checkin: DailyCheckin) async throws 
     func fetchLatestCheckin(uid: String) async throws -> DailyCheckin?
     
 }
