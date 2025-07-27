@@ -13,11 +13,16 @@ class SelectEmotionViewModel: ObservableObject {
     
     // This will hold the check-in data passed from the previous screen.
     var dailyCheckin: DailyCheckin
+    @Published var shouldNavigateToJournalView = false
     
     // The list of emotions to display
     let emotions = ["Startled", "Amazed", "Excited", "Astonished", "Awed", "Eager", "Energetic"]
     
     init(dailyCheckin: DailyCheckin) {
         self.dailyCheckin = dailyCheckin
+    }
+    
+    func continueTapped() {
+        shouldNavigateToJournalView = true;
     }
 }
