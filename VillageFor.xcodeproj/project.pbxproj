@@ -59,10 +59,16 @@
 		5198023E2E12C1C0009BFFBD /* VillageFor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VillageFor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5198024B2E12C1C1009BFFBD /* VillageForTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VillageForTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		519802552E12C1C1009BFFBD /* VillageForUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VillageForUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		51AEF9CD2E1DA48600CF070E /* VillageFor.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = VillageFor.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		51397A632E42D8D000124FB3 /* Exceptions for "VillageFor" folder in "VillageFor" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				App/Views/VillageFor.xctestplan,
+			);
+			target = 5198023D2E12C1C0009BFFBD /* VillageFor */;
+		};
 		519802762E12C518009BFFBD /* Exceptions for "VillageFor" folder in "VillageForTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -83,6 +89,7 @@
 		519802402E12C1C0009BFFBD /* VillageFor */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				51397A632E42D8D000124FB3 /* Exceptions for "VillageFor" folder in "VillageFor" target */,
 				519802762E12C518009BFFBD /* Exceptions for "VillageFor" folder in "VillageForTests" target */,
 				519802772E12C518009BFFBD /* Exceptions for "VillageFor" folder in "VillageForUITests" target */,
 			);
@@ -158,7 +165,6 @@
 		519802352E12C1C0009BFFBD = {
 			isa = PBXGroup;
 			children = (
-				51AEF9CD2E1DA48600CF070E /* VillageFor.xctestplan */,
 				519802402E12C1C0009BFFBD /* VillageFor */,
 				5198024E2E12C1C1009BFFBD /* VillageForTests */,
 				519802582E12C1C1009BFFBD /* VillageForUITests */,

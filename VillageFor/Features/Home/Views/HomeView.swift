@@ -77,13 +77,13 @@ struct HomeView: View {
     }
 }
 
-//#Preview {
-//    let sampleUser = User(id: "123", email: "preview@test.com", firstName: "Caroline", lastName: "Brown")
-//
-//    NavigationStack {
-//        HomeView(user: sampleUser).environmentObject(SessionManager())
-//    }
-//}
+#Preview {
+    let sampleUser = User(id: "123", email: "preview@test.com", firstName: "Caroline", lastName: "Brown")
+
+    NavigationStack {
+        HomeView(user: sampleUser).environmentObject(SessionManager())
+    }
+}
 
 
 
