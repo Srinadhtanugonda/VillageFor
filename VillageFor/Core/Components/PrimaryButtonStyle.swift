@@ -10,12 +10,15 @@ import SwiftUI
 
 struct PrimaryButtonStyle: ButtonStyle {
     
+    // Access the SwiftUI environment for the disabled state.
+       @Environment(\.isEnabled) private var isEnabled
+    
     // This function styles the button's appearance.
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .font(.system(size: 18, weight: .semibold))
             .frame(maxWidth: .infinity, minHeight: 56)
-            .background(Color("ThemeGreen"))
+            .background(isEnabled ? Color("ThemeGreen"): Color.gray)
             .foregroundColor(.white)
             .cornerRadius(28)
             // Add a visual effect for when the button is being pressed.

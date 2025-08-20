@@ -10,10 +10,14 @@ import Foundation
 import UserNotifications
 
 class UserNotificationsService {
-    
-    /// Requests authorization from the user to send push notifications.
     func requestAuthorization() async throws {
-        let options: UNAuthorizationOptions = [.alert, .sound, .badge]
-        try await UNUserNotificationCenter.current().requestAuthorization(options: options)
+        let center = UNUserNotificationCenter.current()
+        let granted = try await center.requestAuthorization(options: [.alert, .sound, .badge])
+        if granted {
+            print("Notification authorization granted.")
+        } else {
+            print("Notification authorization denied.")
+            // Handle denial, e.g., prompt user to go to settings
+        }
     }
 }

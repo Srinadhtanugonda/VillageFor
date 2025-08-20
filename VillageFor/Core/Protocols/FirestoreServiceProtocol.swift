@@ -18,5 +18,17 @@ protocol FirestoreServiceProtocol {
     // We would add other functions here etc.
     func saveDailyCheckin(uid: String, checkin: DailyCheckin) async throws 
     func fetchLatestCheckin(uid: String) async throws -> DailyCheckin?
+    func updateUserDataConsent(uid: String, dataConsent: DataConsent) async throws
+    
+    func updateUserPregnancyPostpartumData(
+         uid: String,
+         pregnancyStatus: String?,
+         isFirstPregnancy: Bool?,
+         isPostpartum: Bool?,
+         postpartumWeeks: Int?,
+         isFirstPostpartumExperience: Bool?,
+         mentalHealthProfessionalType: String?
+     ) async throws
+
     
 }
