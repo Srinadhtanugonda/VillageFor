@@ -1,6 +1,6 @@
 VillageFor is a supportive mobile companion for women navigating the journey of postpartum wellness. Built entirely with SwiftUI and leveraging a Firebase backend, this app provides essential tools to help new mothers monitor their mental health, access resources, and feel connected during a transformative life stage.
 
-Key Features -
+Key Features - ( Screenshots to be uploaded here by sep 15, 2025 - under development)
 
 Secure Onboarding: Full sign-up and login flow using Firebase Authentication.
 
